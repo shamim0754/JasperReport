@@ -1,6 +1,6 @@
 ### How to start ###
 1. create java maven project <br/>
-mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DgroupId=com.javaaround.TestApp -DartifactId=TestApp -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 2. Add dependency at pom.xml
 ```xml
  <dependency>
