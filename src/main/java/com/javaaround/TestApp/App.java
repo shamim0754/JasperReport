@@ -9,10 +9,11 @@ public class App {
 		
 		  JasperPrint jasperPrint = null; 
 		  
-		 String sourceFileName = this.getClass().getClassLoader().getResource("com/javaaround/TestApp/report.jrxml").getFile();    
+		 String sourceFileName = "/TestApp/src/main/java/com/javaaround/TestApp/report.jrxml";    
 		 JasperDesignViewer jasperDesignViewer =
 		  new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
-		  jasperDesignViewer.setVisible(true); /*JasperReport jasperReport =
+		  jasperDesignViewer.setVisible(true); 
+		 /*JasperReport jasperReport =
 		 * JasperCompileManager.compileReport(sourceFileName);
 		 * 
 		 * ArrayList<DataBean> dataList = new ArrayList<DataBean>();
