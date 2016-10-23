@@ -12,6 +12,31 @@ mvn archetype:generate -DgroupId=com.javaaround.TestApp -DartifactId=TestApp -Da
       <version>6.3.0</version>
     </dependency>
 ```
+add exec-maven-plugin for execute app when maven package
+```xml
+<plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.4.0</version>
+          <executions>
+            <execution>
+              <id>my-execution</id>
+              <phase>package</phase>
+              <goals>
+                <goal>java</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <mainClass>com.javaaround.TestApp.App</mainClass>
+            <!--<classpathScope>main</classpathScope> defualt-->
+             <arguments>  
+               <argument>arg0</argument>  
+               <argument>arg1</argument>  
+             </arguments>  
+          </configuration>
+        </plugin>
+```
 3.create report template file(template.jrxml)
 ```xml
 <?xml version = "1.0" encoding = "UTF-8"?>
