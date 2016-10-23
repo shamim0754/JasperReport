@@ -6,14 +6,11 @@
    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation = "http://jasperreports.sourceforge.net/jasperreports
    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-   name = "jasper_report_template" language = "java" pageWidth = "595"
+   name = "template" language = "java" pageWidth = "595"
    pageHeight = "842" columnWidth = "555" leftMargin = "20" rightMargin = "20"
    topMargin = "20" bottomMargin = "20">
-
-   <queryString>
-      <![CDATA[]]>
-   </queryString>
    
+   <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
    <field name = "country" class = "java.lang.String">
       <fieldDescription><![CDATA[country]]></fieldDescription>
    </field>
@@ -21,7 +18,11 @@
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
    </field>
-   
+   <pageHeader>
+		<band height="70" splitType="Stretch">
+			<![CDATA[Report]]>
+		</band>
+	</pageHeader>	
    <columnHeader>
       <band height = "23">
          

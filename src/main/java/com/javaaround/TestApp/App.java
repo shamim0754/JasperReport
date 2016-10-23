@@ -7,12 +7,11 @@ import net.sf.jasperreports.view.JasperDesignViewer;
 public class App {
 	public static void main(String[] args) throws JRException {
 		
-		  JasperPrint jasperPrint = null; 
-		  
-		 String sourceFileName = "/TestApp/src/main/java/com/javaaround/TestApp/report.jrxml";    
+		 JasperPrint jasperPrint = null; 
+		 String sourceFileName = "/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";    
 		 JasperDesignViewer jasperDesignViewer =
-		  new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
-		  jasperDesignViewer.setVisible(true); 
+		 new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
+		 jasperDesignViewer.setVisible(true); 
 		 /*JasperReport jasperReport =
 		 * JasperCompileManager.compileReport(sourceFileName);
 		 * 
