@@ -176,10 +176,10 @@ public class App {
 <background></background> <!-- creating page watermarks -->
 ```
 ### Report Element ###
-1.`<field name>` : This element is used to map data from data sources or queries
-2.`<fieldDescription>` : This element maps the field name with the appropriate element in the XML file
-3.`<staticText>` : contains static text
-4.`<textField>` : define text field data
-5.`<textFieldExpression>` : define variable expression
-6.`$F{country}` : variable expression that map `<field name>`
-7.`<band>` : Bands contain the data, which is displayed in the report.
+1. `<field name>` : This element is used to map data from data sources or queries
+2. `<fieldDescription>` : This element maps the field name with the appropriate element in the XML file
+3. `<staticText>` : contains static text
+4. `<textField>` : define text field data
+5. `<textFieldExpression>` : define variable expression
+6. `$F{country}` : variable expression that map `<field name>`
+7. `<band>` : Bands contain the data, which is displayed in the report.
