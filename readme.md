@@ -67,22 +67,18 @@ add exec-maven-plugin for execute app when maven package
 	</pageHeader>	
    <columnHeader>
       <band height = "23">
-         
          <staticText>
             <reportElement mode = "Opaque" x = "0" y = "3" 
                width = "535" height = "15" backcolor = "#70A9A9" />
-            
             <box>
                <bottomPen lineWidth = "1.0" lineColor = "#CCCCCC" />
             </box>
-            
             <textElement />
             <text><![CDATA[]]> </text>
          </staticText>
          
          <staticText>
             <reportElement x = "414" y = "3" width = "121" height = "15" />
-            
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
@@ -91,38 +87,31 @@ add exec-maven-plugin for execute app when maven package
          
          <staticText>
             <reportElement x = "0" y = "3" width = "136" height = "15" />
-            
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
             <text><![CDATA[Name]]></text>
          </staticText>
-      
       </band>
    </columnHeader>
    
    <detail>
       <band height = "16">
-         
          <staticText>
             <reportElement mode = "Opaque" x = "0" y = "0" 
                width = "535" height = "14" backcolor = "#E5ECF9" />
-            
             <box>
                <bottomPen lineWidth = "0.25" lineColor = "#CCCCCC" />
             </box>
-            
             <textElement />
             <text><![CDATA[]]> </text>
          </staticText>
          
          <textField>
             <reportElement x = "414" y = "0" width = "121" height = "15" />
-            
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font size = "9" />
             </textElement>
-            
             <textFieldExpression class = "java.lang.String">
                <![CDATA[$F{country}]]>
             </textFieldExpression>
@@ -131,15 +120,12 @@ add exec-maven-plugin for execute app when maven package
          <textField>
             <reportElement x = "0" y = "0" width = "136" height = "15" />
             <textElement textAlignment = "Center" verticalAlignment = "Middle" />
-            
             <textFieldExpression class = "java.lang.String">
                <![CDATA[$F{name}]]>
             </textFieldExpression>
          </textField>
-      
       </band>
    </detail>
-  
 </jasperReport>
 ```  
 4.create App.java
