@@ -145,4 +145,33 @@ public class App {
 
 }
 
-```  
+``` 
+5.Run app by following command
+`mvn clean package` 
+
+### Report Main Section ###
+```xml
+<title></title> <!-- only once at the beginning of the report-->
+
+<pageheader></pageheader> <!-- each page in the generated document-->
+
+<columnheader></columnheader> <!-- define column -->
+
+<groupheader></groupheader> 
+
+<detail></detail> <!-- each line of data supplied by the report's data source -->
+
+<groupfooter></groupfooter>
+
+<columnfooter></columnfooter>
+
+<pagefooter></pagefooter>
+
+<lastpagefooter></lastpagefooter>
+
+<summary></summary> <!-- only once at the end of the report -->
+
+<nodata></nodata> <!-- produce the report output if no source data-->
+
+<background></background> <!-- creating page watermarks -->
+```
