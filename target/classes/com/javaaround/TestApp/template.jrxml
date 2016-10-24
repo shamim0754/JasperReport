@@ -1,44 +1,3 @@
-### JasperReports ###
-The JasperReports Library is the world's most popular open source reporting engine. It is entirely written in Java and it is able to use data coming from any kind of data source and produce pixel-perfect documents that can be viewed, printed or exported in a variety of document formats including HTML, PDF, Excel, OpenOffice and Word.
-
-### How to start ###
-1. create java maven project <br/>
-mvn archetype:generate -DgroupId=com.javaaround.TestApp -DartifactId=TestApp -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-2. Add dependency at pom.xml
-```xml
- <dependency>
-      <groupId>net.sf.jasperreports</groupId>
-      <artifactId>jasperreports</artifactId>
-      <version>6.3.0</version>
-    </dependency>
-```
-add exec-maven-plugin for execute app when maven package
-```xml
-<plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>1.4.0</version>
-          <executions>
-            <execution>
-              <id>my-execution</id>
-              <phase>package</phase>
-              <goals>
-                <goal>java</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <mainClass>com.javaaround.TestApp.App</mainClass>
-            <!--<classpathScope>main</classpathScope> defualt-->
-             <arguments>  
-               <argument>arg0</argument>  
-               <argument>arg1</argument>  
-             </arguments>  
-          </configuration>
-        </plugin>
-```
-3.create report template file(template.jrxml)
-```xml
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN"
    "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
@@ -51,8 +10,7 @@ add exec-maven-plugin for execute app when maven package
    pageHeight = "842" columnWidth = "555" leftMargin = "20" rightMargin = "20"
    topMargin = "20" bottomMargin = "20">
    
-   <!-- a section of element content that is marked for the parser to 
-   <br>interpret as only character data, not markup. -->
+   <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
    <field name = "country" class = "java.lang.String">
       <fieldDescription><![CDATA[country]]></fieldDescription>
    </field>
@@ -141,27 +99,3 @@ add exec-maven-plugin for execute app when maven package
    </detail>
   
 </jasperReport>
-```  
-4.create App.java
-```java
-package com.javaaround.TestApp;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperDesignViewer;
-
-public class App {
-	public static void main(String[] args) throws JRException {
-		
-		 JasperPrint jasperPrint = null; 
-		 String sourceFileName = "/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";    
-		 JasperDesignViewer jasperDesignViewer =
-		 new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
-		 jasperDesignViewer.setVisible(true); 
-		
-		
-	}
-
-}
-
-```  
