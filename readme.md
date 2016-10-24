@@ -12,7 +12,7 @@ mvn archetype:generate -DgroupId=com.javaaround.TestApp -DartifactId=TestApp -Da
       <version>6.3.0</version>
     </dependency>
 ```
-add exec-maven-plugin for execute app when maven package
+add `exec-maven-plugin` for execute app when maven package
 ```xml
 <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -59,12 +59,7 @@ add exec-maven-plugin for execute app when maven package
    
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
-   </field>
-   <pageHeader>
-		<band height="70" splitType="Stretch">
-			<![CDATA[Report]]>
-		</band>
-	</pageHeader>	
+   </field>	
    <columnHeader>
       <band height = "23">
          <staticText>
@@ -139,8 +134,7 @@ import net.sf.jasperreports.view.JasperDesignViewer;
 public class App {
 	public static void main(String[] args) throws JRException {
 		
-		 JasperPrint jasperPrint = null; 
-		 String sourceFileName = "/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";    
+		 String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";       
 		 JasperDesignViewer jasperDesignViewer =
 		 new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
 		 jasperDesignViewer.setVisible(true); 

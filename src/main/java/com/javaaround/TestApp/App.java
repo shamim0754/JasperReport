@@ -1,5 +1,9 @@
 package com.javaaround.TestApp;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperDesignViewer;
@@ -8,7 +12,8 @@ public class App {
 	public static void main(String[] args) throws JRException {
 		
 		 JasperPrint jasperPrint = null; 
-		 String sourceFileName = "/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";    
+		 
+		 String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";    
 		 JasperDesignViewer jasperDesignViewer =
 		 new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
 		 jasperDesignViewer.setVisible(true); 

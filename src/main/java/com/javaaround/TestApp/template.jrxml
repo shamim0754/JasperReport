@@ -18,29 +18,21 @@
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
    </field>
-   <pageHeader>
-		<band height="70" splitType="Stretch">
-			<![CDATA[Report]]>
-		</band>
-	</pageHeader>	
+   
    <columnHeader>
       <band height = "23">
-         
          <staticText>
             <reportElement mode = "Opaque" x = "0" y = "3" 
                width = "535" height = "15" backcolor = "#70A9A9" />
-            
             <box>
                <bottomPen lineWidth = "1.0" lineColor = "#CCCCCC" />
             </box>
-            
             <textElement />
             <text><![CDATA[]]> </text>
          </staticText>
          
          <staticText>
             <reportElement x = "414" y = "3" width = "121" height = "15" />
-            
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
@@ -49,7 +41,6 @@
          
          <staticText>
             <reportElement x = "0" y = "3" width = "136" height = "15" />
-            
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
