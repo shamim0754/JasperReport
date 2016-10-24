@@ -12,7 +12,7 @@
    
    <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
    <field name = "country" class = "java.lang.String">
-      <fieldDescription><![CDATA[country]]></fieldDescription>
+      <fieldDescription><![CDATA[address]]></fieldDescription>
    </field>
    
    <field name = "name" class = "java.lang.String">
@@ -28,7 +28,7 @@
                <bottomPen lineWidth = "1.0" lineColor = "#CCCCCC" />
             </box>
             <textElement />
-            <text><![CDATA[]]> </text>
+            <text><![CDATA[SL]]> </text>
          </staticText>
          
          <staticText>
@@ -36,7 +36,7 @@
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
-            <text><![CDATA[Country]]></text>
+            <text><![CDATA[Address]]></text>
          </staticText>
          
          <staticText>
@@ -52,7 +52,6 @@
    
    <detail>
       <band height = "16">
-         
          <staticText>
             <reportElement mode = "Opaque" x = "0" y = "0" 
                width = "535" height = "14" backcolor = "#E5ECF9" />
@@ -73,7 +72,7 @@
             </textElement>
             
             <textFieldExpression class = "java.lang.String">
-               <![CDATA[$F{country}]]>
+               <![CDATA[$F{address}]]>
             </textFieldExpression>
          </textField>
          

@@ -54,7 +54,7 @@ add `exec-maven-plugin` for execute app when maven package
    <!-- a section of element content that is marked for the parser to 
    <br>interpret as only character data, not markup. -->
    <field name = "country" class = "java.lang.String">
-      <fieldDescription><![CDATA[country]]></fieldDescription>
+      <fieldDescription><![CDATA[address]]></fieldDescription>
    </field>
    
    <field name = "name" class = "java.lang.String">
@@ -69,7 +69,7 @@ add `exec-maven-plugin` for execute app when maven package
                <bottomPen lineWidth = "1.0" lineColor = "#CCCCCC" />
             </box>
             <textElement />
-            <text><![CDATA[]]> </text>
+            <text><![CDATA[SL]]> </text>
          </staticText>
          
          <staticText>
@@ -108,7 +108,7 @@ add `exec-maven-plugin` for execute app when maven package
                <font size = "9" />
             </textElement>
             <textFieldExpression class = "java.lang.String">
-               <![CDATA[$F{country}]]>
+               <![CDATA[$F{address}]]>
             </textFieldExpression>
          </textField>
          
@@ -134,7 +134,8 @@ import net.sf.jasperreports.view.JasperDesignViewer;
 public class App {
 	public static void main(String[] args) throws JRException {
 		
-		 String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";       
+		 String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/"+
+		 "javaaround/TestApp/template.jrxml";       
 		 JasperDesignViewer jasperDesignViewer =
 		 new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
 		 jasperDesignViewer.setVisible(true); 
