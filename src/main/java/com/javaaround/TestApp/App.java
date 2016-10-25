@@ -3,48 +3,59 @@ package com.javaaround.TestApp;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.javaaround.TestApp.model.Employee;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperDesignViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class App {
 	public static void main(String[] args) throws JRException {
+
+		JasperPrint jasperPrint = null;
+
+		String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";
+		/*JasperDesignViewer jasperDesignViewer = new JasperDesignViewer(sourceFileName, true); // true
+		jasperDesignViewer.setVisible(true);*/
 		
-		 JasperPrint jasperPrint = null; 
-		 
-		 String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";    
-		 JasperDesignViewer jasperDesignViewer =
-		 new JasperDesignViewer(sourceFileName, true); // true means it not xml file 
-		 jasperDesignViewer.setVisible(true); 
-		 /*JasperReport jasperReport =
-		 * JasperCompileManager.compileReport(sourceFileName);
-		 * 
-		 * ArrayList<DataBean> dataList = new ArrayList<DataBean>();
-		 * dataList.add(new DataBean ("Manisha", "India")); dataList.add(new
-		 * DataBean("Dennis Ritchie", "USA")); dataList.add(new
-		 * DataBean("V.Anand", "India")); dataList.add(new DataBean("Shrinath",
-		 * "California"));
-		 * 
-		 * JRBeanCollectionDataSource beanColDataSource = new
-		 * JRBeanCollectionDataSource(dataList); Map parameters = new HashMap();
-		 * try { jasperPrint = JasperFillManager.fillReport( jasperReport,
-		 * parameters, beanColDataSource);
-		 * 
-		 * // JasperViewer.viewReport(jasperPrint,false);
-		 * 
+		//compile report first
+		JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
+		
+		//data
+		ArrayList<Employee> employeeList = new ArrayList<Employee>();
+		employeeList.add(new Employee("Shamim", "Tangail"));
+		employeeList.add(new Employee("Alamin", "Rajbari"));
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
+
+		Map parameters = new HashMap();
+		try {
+			//fill data
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+			JasperViewer.viewReport(jasperPrint, false);
+		} catch (Exception e) {
+
+		}
+		/*
 		 * // You can use JasperPrint to create PDF
 		 * //JasperFillManager.printReportToPdfFile(jasperPrint,
 		 * "BasicReport.pdf"); } catch (JRException e) { e.printStackTrace(); }
-		 * /*DJ test = new DJ(); test.testReport(); test.exportToJRXML();
+		 * DJ test = new DJ(); test.testReport(); test.exportToJRXML();
 		 * JasperViewer.viewReport(test.jp); //finally display the report report
 		 * JasperDesignViewer.viewReportDesign(test.jr);
 		 * 
-		 
-		out.println("Hllo");
-
-		/*
-		 * //JasperReportBuilder report = DynamicReports.report(); Connection
+		 * 
+		 * out.println("Hllo");
+		 * 
+		 * /* //JasperReportBuilder report = DynamicReports.report(); Connection
 		 * connection = null; try { Class.forName("com.mysql.jdbc.Driver");
 		 * connection =
 		 * DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root"
@@ -67,8 +78,8 @@ public class App {
 		 * FileOutputStream("e:/report.pdf")); } catch (DRException e) {
 		 * e.printStackTrace(); } catch (FileNotFoundException e) {
 		 * e.printStackTrace(); }
+		 * 
 		 */
-		
 	}
 
 }

@@ -11,14 +11,18 @@
    topMargin = "20" bottomMargin = "20">
    
    <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
-   <field name = "country" class = "java.lang.String">
+   <field name = "address" class = "java.lang.String">
       <fieldDescription><![CDATA[address]]></fieldDescription>
    </field>
    
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
    </field>
-   
+   <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
+      <variableExpression>
+         <![CDATA[Boolean.TRUE]]>
+      </variableExpression>
+   </variable>
    <columnHeader>
       <band height = "23">
          <staticText>
@@ -52,7 +56,7 @@
    
    <detail>
       <band height = "16">
-         <staticText>
+         <textField>
             <reportElement mode = "Opaque" x = "0" y = "0" 
                width = "535" height = "14" backcolor = "#E5ECF9" />
             
@@ -61,8 +65,10 @@
             </box>
             
             <textElement />
-            <text><![CDATA[]]> </text>
-         </staticText>
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$V{countNumber}]]>
+            </textFieldExpression>
+         </textField>
          
          <textField>
             <reportElement x = "414" y = "0" width = "121" height = "15" />

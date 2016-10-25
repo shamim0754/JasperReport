@@ -59,7 +59,12 @@ add `exec-maven-plugin` for execute app when maven package
    
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
-   </field>	
+   </field>
+   <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
+      <variableExpression>
+         <![CDATA[Boolean.TRUE]]>
+      </variableExpression>
+   </variable>	
    <columnHeader>
       <band height = "23">
          <staticText>
@@ -92,15 +97,19 @@ add `exec-maven-plugin` for execute app when maven package
    
    <detail>
       <band height = "16">
-         <staticText>
+          <textField>
             <reportElement mode = "Opaque" x = "0" y = "0" 
                width = "535" height = "14" backcolor = "#E5ECF9" />
+            
             <box>
                <bottomPen lineWidth = "0.25" lineColor = "#CCCCCC" />
             </box>
+            
             <textElement />
-            <text><![CDATA[]]> </text>
-         </staticText>
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$V{countNumber}]]>
+            </textFieldExpression>
+         </textField>
          
          <textField>
             <reportElement x = "414" y = "0" width = "121" height = "15" />
