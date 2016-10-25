@@ -409,3 +409,20 @@ Run app again by following command
 
 ![Image of Yaktocat](image/3.png)
 
+### Data from database ###
+update App.java
+```java
+Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+			//fill data
+			//jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+```
+
+update template.jrxml
+```xml
+<queryString language="SQL">
+		<![CDATA[SELECT name,address FROM employee2;]]>
+</queryString>
+```
+

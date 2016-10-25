@@ -12,7 +12,9 @@
    
    <parameter name = "ReportTitle" class = "java.lang.String"/>
    <parameter name = "Author" class = "java.lang.String"/>
-   
+   <queryString language="SQL">
+		<![CDATA[SELECT name,address FROM employee2;]]>
+	</queryString>
    <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
    <field name = "address" class = "java.lang.String">
       <fieldDescription><![CDATA[address]]></fieldDescription>

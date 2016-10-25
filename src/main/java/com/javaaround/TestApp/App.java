@@ -1,6 +1,8 @@
 package com.javaaround.TestApp;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,15 +39,20 @@ public class App {
 		employeeList.add(new Employee("Shamim", "Tangail"));
 		employeeList.add(new Employee("Alamin", "Rajbari"));
 		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
-
+		
+		//
+		
 		Map parameters = new HashMap();
 		// Passing ReportTitle and Author as parameters
         parameters.put("ReportTitle", "List of Employee");
         parameters.put("Author", "Prepared By Shamim Miah");
 
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
 			//fill data
-			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+			//jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
 			
 			if (jasperPrint != null) {
 	            //export pdf
