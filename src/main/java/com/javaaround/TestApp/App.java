@@ -18,6 +18,7 @@ import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class App {
 	public static void main(String[] args) throws JRException {
@@ -38,10 +39,14 @@ public class App {
 		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
 
 		Map parameters = new HashMap();
+		// Passing ReportTitle and Author as parameters
+        parameters.put("ReportTitle", "List of Employee");
+        parameters.put("Author", "Prepared By Shamim Miah");
+
 		try {
 			//fill data
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
-			//JasperViewer.viewReport(jasperPrint, false);
+			
 			if (jasperPrint != null) {
 	            //export pdf
 	            JasperExportManager.exportReportToPdfFile(jasperPrint,
@@ -64,8 +69,9 @@ public class App {
 	            
 	            //export report
 	            exporter.exportReport();
-
 	         }
+			JasperViewer.viewReport(jasperPrint, false);
+			
 		} catch (Exception e) {
 
 		}

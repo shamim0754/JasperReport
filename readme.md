@@ -299,7 +299,8 @@ public class App {
 
 		JasperPrint jasperPrint = null;
 
-		String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";
+		String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/"+
+		"javaaround/TestApp/template.jrxml";
 		/*JasperDesignViewer jasperDesignViewer = new JasperDesignViewer(sourceFileName, true); // true
 		jasperDesignViewer.setVisible(true);*/
 		
@@ -350,3 +351,61 @@ public class App {
 }
 
 ```
+
+### Parameter pass to template ###
+add param at App.java
+```java
+Map parameters = new HashMap();
+// Passing ReportTitle and Author as parameters
+parameters.put("ReportTitle", "List of Employee");
+parameters.put("Author", "Prepared By Shamim Miah");
+```
+
+update template.jrxml
+```xml
+<parameter name = "ReportTitle" class = "java.lang.String"/>
+<parameter name = "Author" class = "java.lang.String"/>
+<title>
+      <band height = "70">
+         
+         <line>
+            <reportElement x = "0" y = "0" width = "515" height = "1"/>
+         </line>
+         
+         <textField isBlankWhenNull = "true" bookmarkLevel = "1">
+            <reportElement x = "0" y = "10" width = "515" height = "30"/>
+           
+            <textElement textAlignment = "Center">
+               <font size = "22"/>
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{ReportTitle}]]>
+            </textFieldExpression>
+				
+            <anchorNameExpression>
+               <![CDATA["Title"]]>
+            </anchorNameExpression>
+         </textField>
+         
+         <textField isBlankWhenNull = "true">
+            <reportElement  x = "0" y = "40" width = "515" height = "20"/>
+            
+            <textElement textAlignment = "Center">
+               <font size = "10"/>
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{Author}]]>
+            </textFieldExpression>
+         </textField>
+      
+      </band>
+   </title>
+```
+
+Run app again by following command
+`mvn clean package` 
+
+![Image of Yaktocat](image/3.png)
+

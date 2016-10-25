@@ -10,6 +10,9 @@
    pageHeight = "842" columnWidth = "555" leftMargin = "20" rightMargin = "20"
    topMargin = "20" bottomMargin = "20">
    
+   <parameter name = "ReportTitle" class = "java.lang.String"/>
+   <parameter name = "Author" class = "java.lang.String"/>
+   
    <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
    <field name = "address" class = "java.lang.String">
       <fieldDescription><![CDATA[address]]></fieldDescription>
@@ -18,11 +21,49 @@
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
    </field>
+   
    <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
       <variableExpression>
          <![CDATA[Boolean.TRUE]]>
       </variableExpression>
    </variable>
+      <title>
+      <band height = "70">
+         
+         <line>
+            <reportElement x = "0" y = "0" width = "515" height = "1"/>
+         </line>
+         
+         <textField isBlankWhenNull = "true" bookmarkLevel = "1">
+            <reportElement x = "0" y = "10" width = "515" height = "30"/>
+           
+            <textElement textAlignment = "Center">
+               <font size = "22"/>
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{ReportTitle}]]>
+            </textFieldExpression>
+				
+            <anchorNameExpression>
+               <![CDATA["Title"]]>
+            </anchorNameExpression>
+         </textField>
+         
+         <textField isBlankWhenNull = "true">
+            <reportElement  x = "0" y = "40" width = "515" height = "20"/>
+            
+            <textElement textAlignment = "Center">
+               <font size = "10"/>
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{Author}]]>
+            </textFieldExpression>
+         </textField>
+      
+      </band>
+   </title>
    <columnHeader>
       <band height = "23">
          <staticText>
