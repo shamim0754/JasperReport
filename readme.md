@@ -524,3 +524,72 @@ update template.jrxml
 
 ![Image of Yaktocat](image/4.png)
 
+### Group Data ###
+ A report group represents a sequence of consecutive records in the data source, which have something in common, such as the value of a certain report fields.
+During the iteration through the data source at report-filling time if the value of the group expression changes, a group rupture occurs and the corresponding <groupFooter> and <groupHeader> sections are inserted in the resulting document.
+
+update template.jrxml
+```xml
+   <variable name = "AddressNumber" class = "java.lang.Integer"
+      incrementType = "Group" incrementGroup = "AddressGroup"
+      calculation = "Count">
+      <variableExpression><![CDATA[Boolean.TRUE]]></variableExpression>
+   </variable>
+   
+   <group name = "AddressGroup" minHeightToStartNewPage = "60">
+      <groupExpression><![CDATA[$F{address}]]></groupExpression>
+      
+      <groupHeader>
+         <band height = "20">
+            
+            <textField evaluationTime = "Group" evaluationGroup = "AddressGroup"
+               bookmarkLevel = "1">
+               <reportElement mode = "Opaque" x = "0" y = "5" width = "515"
+                  height = "15" backcolor = "#C0C0C0"/>
+               
+               <box leftPadding = "10">
+                  <bottomPen lineWidth = "1.0"/>
+               </box>
+               <textElement/>
+               
+               <textFieldExpression class = "java.lang.String">
+                  <![CDATA["  " + String.valueOf($V{AddressNumber}) + ". "
+                  + String.valueOf($F{address})]]>
+               </textFieldExpression>
+               
+               <anchorNameExpression>
+                  <![CDATA[String.valueOf($F{address})]]>
+               </anchorNameExpression>
+            </textField>
+         
+         </band>
+      </groupHeader>
+      
+      <groupFooter>
+         <band height = "20">
+            
+            <staticText>
+               <reportElement x = "400" y = "1" width = "60" height = "15"/>
+               <textElement textAlignment = "Right"/>
+               <text><![CDATA[Count :]]></text>
+            </staticText>
+            
+            <textField>
+               <reportElement x = "460" y = "1" width = "30" height = "15"/>
+               <textElement textAlignment = "Right"/>
+               
+               <textFieldExpression class = "java.lang.Integer">
+                  <![CDATA[$V{AddressGroup_COUNT}]]>
+               </textFieldExpression>
+            </textField>
+         
+         </band>
+      </groupFooter>
+   
+   </group>
+```
+
+![Image of Yaktocat](image/5.png)
+
+
+
