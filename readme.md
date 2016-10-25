@@ -59,12 +59,7 @@ add `exec-maven-plugin` for execute app when maven package
    
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
-   </field>
-   <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
-      <variableExpression>
-         <![CDATA[Boolean.TRUE]]>
-      </variableExpression>
-   </variable>	
+   </field>	
    <columnHeader>
       <band height = "23">
          <staticText>
@@ -97,19 +92,15 @@ add `exec-maven-plugin` for execute app when maven package
    
    <detail>
       <band height = "16">
-          <textField>
+         <staticText>
             <reportElement mode = "Opaque" x = "0" y = "0" 
                width = "535" height = "14" backcolor = "#E5ECF9" />
-            
             <box>
                <bottomPen lineWidth = "0.25" lineColor = "#CCCCCC" />
             </box>
-            
             <textElement />
-            <textFieldExpression class = "java.lang.String">
-               <![CDATA[$V{countNumber}]]>
-            </textFieldExpression>
-         </textField>
+            <text><![CDATA[]]> </text>
+         </staticText>
          
          <textField>
             <reportElement x = "414" y = "0" width = "121" height = "15" />
@@ -192,3 +183,88 @@ public class App {
 5. `<textFieldExpression>` : define variable expression
 6. `$F{country}` : variable expression that map `<field name>`
 7. `<band>` : Bands contain the data, which is displayed in the report.
+
+### Report With Data ###
+update App.java
+```java
+package com.javaaround.TestApp;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.javaaround.TestApp.model.Employee;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperDesignViewer;
+import net.sf.jasperreports.view.JasperViewer;
+
+public class App {
+	public static void main(String[] args) throws JRException {
+
+		JasperPrint jasperPrint = null;
+
+		String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";
+		/*JasperDesignViewer jasperDesignViewer = new JasperDesignViewer(sourceFileName, true); // true
+		jasperDesignViewer.setVisible(true);*/
+		
+		//compile report first
+		JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
+		
+		//data
+		ArrayList<Employee> employeeList = new ArrayList<Employee>();
+		employeeList.add(new Employee("Shamim", "Tangail"));
+		employeeList.add(new Employee("Alamin", "Rajbari"));
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
+
+		Map parameters = new HashMap();
+		try {
+			//fill data
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+			JasperViewer.viewReport(jasperPrint, false);
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+}
+
+```
+
+update template.jrxml for auto serial number
+```xml
+	<!-- create variable for auto serial number -->
+	<variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
+      <variableExpression>
+         <![CDATA[Boolean.TRUE]]>
+      </variableExpression>
+   </variable>
+   <!-- display variable -->
+   <textField>
+	    <reportElement mode = "Opaque" x = "0" y = "0" 
+	       width = "535" height = "14" backcolor = "#E5ECF9" />
+	    
+	    <box>
+	       <bottomPen lineWidth = "0.25" lineColor = "#CCCCCC" />
+	    </box>
+	    
+	    <textElement />
+	    <textFieldExpression class = "java.lang.String">
+	       <![CDATA[$V{countNumber}]]>
+	    </textFieldExpression>
+ 	</textField>
+```
+
+Run app again by following command
+`mvn clean package` 
+
+![Image of Yaktocat](image/1.png)
