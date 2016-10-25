@@ -185,7 +185,7 @@ public class App {
 6. `$F{country}` : variable expression that map `<field name>`
 7. `<band>` : Bands contain the data, which is displayed in the report.
 
-### Report With Data ###
+### Report With static Data ###
 update App.java
 ```java
 package com.javaaround.TestApp;
@@ -269,3 +269,84 @@ Run app again by following command
 `mvn clean package` 
 
 ![Image of Yaktocat](image/1.png)
+
+### Exporting Reports(pdf,xls) ###
+update App.java
+```java
+package com.javaaround.TestApp;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.javaaround.TestApp.model.Employee;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+
+public class App {
+	public static void main(String[] args) throws JRException {
+
+		JasperPrint jasperPrint = null;
+
+		String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";
+		/*JasperDesignViewer jasperDesignViewer = new JasperDesignViewer(sourceFileName, true); // true
+		jasperDesignViewer.setVisible(true);*/
+		
+		//compile report first
+		JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
+		
+		//data
+		ArrayList<Employee> employeeList = new ArrayList<Employee>();
+		employeeList.add(new Employee("Shamim", "Tangail"));
+		employeeList.add(new Employee("Alamin", "Rajbari"));
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
+
+		Map parameters = new HashMap();
+		try {
+			//fill data
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+			//JasperViewer.viewReport(jasperPrint, false);
+			if (jasperPrint != null) {
+	            //export pdf
+	            JasperExportManager.exportReportToPdfFile(jasperPrint,
+	               "F://sample_report.pdf");
+
+	            //export html
+	            JasperExportManager.exportReportToHtmlFile(jasperPrint,
+	               "F://sample_report.html");
+
+	            //export excel
+	            JRXlsxExporter exporter = new JRXlsxExporter();
+	            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+	            File outputFile = new File("F://sample_report.xlsx");
+	            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputFile));
+	            SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration(); 
+	            configuration.setDetectCellType(true);//Set configuration as you like it!!
+	            configuration.setCollapseRowSpan(false);
+	            
+	            exporter.setConfiguration(configuration);
+	            
+	            //export report
+	            exporter.exportReport();
+
+	         }
+		} catch (Exception e) {
+
+		}
+		
+	}
+
+}
+
+```

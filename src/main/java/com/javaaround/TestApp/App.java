@@ -1,8 +1,6 @@
 package com.javaaround.TestApp;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +9,15 @@ import com.javaaround.TestApp.model.Employee;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.view.JasperDesignViewer;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 public class App {
 	public static void main(String[] args) throws JRException {
@@ -40,7 +41,31 @@ public class App {
 		try {
 			//fill data
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
-			JasperViewer.viewReport(jasperPrint, false);
+			//JasperViewer.viewReport(jasperPrint, false);
+			if (jasperPrint != null) {
+	            //export pdf
+	            JasperExportManager.exportReportToPdfFile(jasperPrint,
+	               "F://sample_report.pdf");
+
+	            //export html
+	            JasperExportManager.exportReportToHtmlFile(jasperPrint,
+	               "F://sample_report.html");
+
+	            //export excel
+	            JRXlsxExporter exporter = new JRXlsxExporter();
+	            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+	            File outputFile = new File("F://sample_report.xlsx");
+	            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputFile));
+	            SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration(); 
+	            configuration.setDetectCellType(true);//Set configuration as you like it!!
+	            configuration.setCollapseRowSpan(false);
+	            
+	            exporter.setConfiguration(configuration);
+	            
+	            //export report
+	            exporter.exportReport();
+
+	         }
 		} catch (Exception e) {
 
 		}
