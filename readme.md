@@ -413,10 +413,10 @@ Run app again by following command
 update App.java
 ```java
 Class.forName("com.mysql.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
-			//fill data
-			//jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
-			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+//fill data
+//jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
 ```
 
 update template.jrxml
@@ -425,4 +425,13 @@ update template.jrxml
 		<![CDATA[SELECT name,address FROM employee2;]]>
 </queryString>
 ```
+
+### Expression Revised ###
+| description        | format           | usage   |
+| -----------------  |:---------------: | ------: |
+| Field Reference    |$F{and}           | $F{Name}|
+| Variable Reference |$V{and}           | $V{Name}|
+| Parameter Reference|$P{and}           | $P{Name}|
+| Resource Message   |$R{key}           | $R{report.title}|
+| ifelse   |<![CDATA[$F{country}.isEmpty() ? "NO COUNTRY" : $F{country}]]>|
 
