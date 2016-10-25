@@ -148,6 +148,7 @@ public class App {
 ``` 
 5.Run app by following command
 `mvn clean package` 
+![Image of Yaktocat](image/2.png)
 
 ### Report Main Section ###
 ```xml
