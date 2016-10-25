@@ -453,23 +453,23 @@ declaration
    </variableExpression>
 </variable>
 ```
-name == name of the variable 
-Calculation = following value supported<br>
+__name__ == name of the variable <br>
+__Calculation__ = following value supported<br>
 Average,Count,First,Highest,Sum,System (custom formula using scriplets)<br>
  
-IncrementType = following value supported<br>
-Column − The variable value is recalculated at the end of each column.<br>
-Group − The variable value is recalculated when the group specified by incrementGroup changes.<br>
-None − The variable value is recalculated with every record.<br>
-Page − The variable value is recalculated at the end of every page.<br>
-Report − The variable value is recalculated once, at the end of the report.<br>
+__IncrementType__ = following value supported<br>
+__Column__ − The variable value is recalculated at the end of each column.<br>
+__Group__ − The variable value is recalculated when the group specified by incrementGroup changes.<br>
+__None__ − The variable value is recalculated with every record.<br>
+__Page__ − The variable value is recalculated at the end of every page.<br>
+__Report__ − The variable value is recalculated once, at the end of the report.<br>
 
-IncrementGroup == name of the group at which the variable value is recalculated, when incrementType is Group<br>
-ResetType==determines when the value of a variable is reset<br>
-Column − The variable value is reset at the beginning of each column.<br>
-Group − The variable value is reset when the group specified by incrementGroup changes.<br>
-None − The variable value is never reset.<br>
-Page − The variable value is reset at the beginning of every page.<br>
-Report − The variable value is reset only once, at the beginning of the report.<br>
-ResetGroup==name of the group at which the variable value is reset, when resetType is Group
+__IncrementGroup__ == name of the group at which the variable value is recalculated, when incrementType is Group<br>
+__ResetType__==determines when the value of a variable is reset<br>
+__Column__ − The variable value is reset at the beginning of each column.<br>
+__Group__ − The variable value is reset when the group specified by incrementGroup changes.<br>
+__None__ − The variable value is never reset.<br>
+__Page__ − The variable value is reset at the beginning of every page.<br>
+__Report__ − The variable value is reset only once, at the beginning of the report.<br>
+__ResetGroup__==name of the group at which the variable value is reset, when resetType is Group
 
