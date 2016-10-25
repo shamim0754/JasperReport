@@ -426,6 +426,12 @@ update template.jrxml
 </queryString>
 ```
 
+### Sorting ###
+update template.jrxml
+```
+<sortField name = "name" order = "Descending"/>
+```
+
 ### Expression Revised ###
 | description        | format           | usage   |
 | -----------------  |:---------------: | ------: |

@@ -23,7 +23,7 @@
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
    </field>
-   
+   <sortField name = "name" order = "Descending"/>
    <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
       <variableExpression>
          <![CDATA[Boolean.TRUE]]>
