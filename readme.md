@@ -473,3 +473,54 @@ __Page__ − The variable value is reset at the beginning of every page.<br>
 __Report__ − The variable value is reset only once, at the beginning of the report.<br>
 __ResetGroup__==name of the group at which the variable value is reset, when resetType is Group
 
+### Sum of Total/Average ###
+update template.jrxml
+```xml
+<variable name="total" class="java.lang.Double" calculation="Sum">
+    <variableExpression><![CDATA[$F{salary}]]></variableExpression>
+</variable>
+<variable name="average" class="java.lang.Double" calculation="Average">
+    <variableExpression><![CDATA[$F{salary}]]></variableExpression>
+</variable>
+   
+<summary>
+    <band height="20">
+        <staticText>
+            <reportElement x="0" y="0" width="100" height="20"/>
+            <box leftPadding="10"/>
+            <textElement>
+                <font isBold="true"/>
+            </textElement>
+            <text><![CDATA[Total]]></text>
+        </staticText>
+        <textField>
+            <reportElement x="100" y="0" width="100" height="20"/>
+            <box leftPadding="10"/>
+            <textElement>
+                <font isBold="true" isItalic="true"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+        </textField>
+   
+        <staticText>
+            <reportElement x="160" y="0" width="100" height="20"/>
+            <box leftPadding="10"/>
+            <textElement>
+                <font isBold="true"/>
+            </textElement>
+            <text><![CDATA[Average]]></text>
+        </staticText>
+        <textField>
+            <reportElement x="250" y="0" width="100" height="20"/>
+            <box leftPadding="10"/>
+            <textElement>
+                <font isBold="true" isItalic="true"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$V{average}]]></textFieldExpression>
+        </textField>
+   </band>
+</summary>	
+```
+
+![Image of Yaktocat](image/4.png)
+
