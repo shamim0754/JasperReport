@@ -13,15 +13,18 @@
    <parameter name = "ReportTitle" class = "java.lang.String"/>
    <parameter name = "Author" class = "java.lang.String"/>
    <queryString language="SQL">
-		<![CDATA[SELECT name,address FROM employee2;]]>
+		<![CDATA[SELECT name,address,salary FROM employee2;]]>
 	</queryString>
-   <!-- a section of element content that is marked for the parser to interpret as only character data, not markup. -->
+   <!--CDATA a section of element content that is marked for the parser to interpret as only character data, not markup. -->
    <field name = "address" class = "java.lang.String">
       <fieldDescription><![CDATA[address]]></fieldDescription>
    </field>
    
    <field name = "name" class = "java.lang.String">
       <fieldDescription><![CDATA[name]]></fieldDescription>
+   </field>
+   <field name = "salary" class = "java.lang.Double">
+      <fieldDescription><![CDATA[salary]]></fieldDescription>
    </field>
    <sortField name = "name" order = "Descending"/>
    <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
@@ -79,7 +82,7 @@
          </staticText>
          
          <staticText>
-            <reportElement x = "414" y = "3" width = "121" height = "15" />
+            <reportElement x = "200" y = "3" width = "70" height = "15" />
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
@@ -87,13 +90,19 @@
          </staticText>
          
          <staticText>
-            <reportElement x = "0" y = "3" width = "136" height = "15" />
+            <reportElement x = "0" y = "3" width = "70" height = "15" />
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font isBold = "true" />
             </textElement>
             <text><![CDATA[Name]]></text>
          </staticText>
-      
+      	 <staticText>
+            <reportElement x = "400" y = "3" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font isBold = "true" />
+            </textElement>
+            <text><![CDATA[Salary]]></text>
+         </staticText>	
       </band>
    </columnHeader>
    
@@ -114,7 +123,7 @@
          </textField>
          
          <textField>
-            <reportElement x = "414" y = "0" width = "121" height = "15" />
+            <reportElement x = "200" y = "0" width = "70" height = "15" />
             
             <textElement textAlignment = "Center" verticalAlignment = "Middle">
                <font size = "9" />
@@ -126,14 +135,21 @@
          </textField>
          
          <textField>
-            <reportElement x = "0" y = "0" width = "136" height = "15" />
+            <reportElement x = "0" y = "0" width = "70" height = "15" />
             <textElement textAlignment = "Center" verticalAlignment = "Middle" />
             
             <textFieldExpression class = "java.lang.String">
                <![CDATA[$F{name}]]>
             </textFieldExpression>
          </textField>
-      
+      	<textField>
+            <reportElement x = "400" y = "0" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle" />
+            
+            <textFieldExpression class = "java.lang.Double">
+               <![CDATA[$F{salary}]]>
+            </textFieldExpression>
+         </textField>
       </band>
    </detail>
   
