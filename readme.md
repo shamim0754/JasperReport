@@ -431,6 +431,7 @@ update template.jrxml
 ```
 <sortField name = "name" order = "Descending"/>
 ```
+![Image of Yaktocat](image/6.png)
 
 ### Expression Revised ###
 | description        | format           | usage   |
@@ -523,7 +524,6 @@ update template.jrxml
 ```
 
 ![Image of Yaktocat](image/4.png)
-
 ### Group Data ###
  A report group represents a sequence of consecutive records in the data source, which have something in common, such as the value of a certain report fields.
 During the iteration through the data source at report-filling time if the value of the group expression changes, a group rupture occurs and the corresponding <groupFooter> and <groupHeader> sections are inserted in the resulting document.

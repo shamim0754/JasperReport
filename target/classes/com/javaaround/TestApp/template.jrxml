@@ -129,7 +129,15 @@
                <![CDATA[$P{Author}]]>
             </textFieldExpression>
          </textField>
-      
+      	 <textField isStretchWithOverflow = "true">
+            <reportElement x = "0" y = "10" width = "515" height = "15" />
+            <textElement textAlignment = "Center"/>
+               
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA["There are " + String.valueOf($V{REPORT_COUNT}) +
+                  " records on this report."]]>
+            </textFieldExpression>
+         </textField>
       </band>
    </title>
    <columnHeader>

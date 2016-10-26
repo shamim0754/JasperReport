@@ -55,6 +55,7 @@ public class App {
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
 			
 			if (jasperPrint != null) {
+				
 	            //export pdf
 	            JasperExportManager.exportReportToPdfFile(jasperPrint,
 	               "F://sample_report.pdf");
