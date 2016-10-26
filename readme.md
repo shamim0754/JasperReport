@@ -685,6 +685,44 @@ public class MyScriptlet extends JRDefaultScriptlet {
 
 ```
 
+update template.xml
+```xml
+<jasperReport xmlns = "http://jasperreports.sourceforge.net/jasperreports"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://jasperreports.sourceforge.net/jasperreports
+   http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+   name = "template" language = "java" pageWidth = "595"
+   pageHeight = "842" columnWidth = "555" leftMargin = "20" rightMargin = "20"
+   topMargin = "20" bottomMargin = "20" scriptletClass = "com.javaaround.TestApp.MyScriptlet">
+ <variable name="someVar" class="java.lang.String" calculation="System"/>
+ <textField isBlankWhenNull = "true">
+    <reportElement  x = "0" y = "10" width = "600" height = "30"/>
+    <textElement textAlignment = "Left">
+       <font size = "10"/>
+    </textElement>
+    <textFieldExpression class = "java.lang.String">
+       <![CDATA[$V{someVar}]]>
+    </textFieldExpression>
+		
+ </textField>
+ <textField isStretchWithOverflow = "true">
+    <reportElement positionType = "Float" x = "200" y = "0" width = "515"
+       height = "15" />
+       
+    <textElement textAlignment = "Center">
+       <font size = "10"/>
+    </textElement>
+       
+    <textFieldExpression class = "java.lang.String">
+       <![CDATA[$P{REPORT_SCRIPTLET}.hello()]]>
+    </textFieldExpression>
+    
+</textField>           
+```
+
+![Image of Yaktocat](image/7.png)
+
+
 
 
 
