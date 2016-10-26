@@ -591,5 +591,103 @@ update template.jrxml
 
 ![Image of Yaktocat](image/5.png)
 
+### Scriptlets. ###
+There are situations when a complex functionality such as String manipulations, building of Maps, or Lists of objects in memory or manipulations of dates using 3rd party Java APIs cannot be achieved easily using report expressions or variables.For such situations, JasperReports Scriptlets to use pure java code based on events fire.
+### Scriptlets Event ###
+```java
+package com.javaaround.TestApp;
+
+import net.sf.jasperreports.engine.JRAbstractScriptlet;
+import net.sf.jasperreports.engine.JRScriptletException;
+
+public class MyScriptlet extends JRAbstractScriptlet  {
+	@Override
+	public void afterReportInit() throws JRScriptletException {
+		
+	}
+
+	@Override
+	public void afterColumnInit() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afterDetailEval() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afterGroupInit(String arg0) throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afterPageInit() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void beforeColumnInit() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void beforeDetailEval() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void beforeGroupInit(String arg0) throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void beforePageInit() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void beforeReportInit() throws JRScriptletException {
+		// TODO Auto-generated method stub
+		
+	}
+}
+
+```
+
+JRDefaultScriptlet have empty implementation of JRAbstractScriptlet
+
+create MyScriptlet.java
+```java
+package com.javaaround.TestApp;
+
+import net.sf.jasperreports.engine.JRDefaultScriptlet;
+import net.sf.jasperreports.engine.JRScriptletException;
+
+public class MyScriptlet extends JRDefaultScriptlet {
+	@Override
+	public void afterReportInit() throws JRScriptletException {
+		this.setVariableValue("someVar", "This variable value=" + "was modified by the scriptlet.");
+	}
+
+	public String hello() throws JRScriptletException {
+		return "Hello! I'm the report's scriptlet object.";
+	}
+}
+
+```
+
+
+
+
+
 
 

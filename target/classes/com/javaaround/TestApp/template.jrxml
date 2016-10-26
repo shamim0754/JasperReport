@@ -8,7 +8,7 @@
    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
    name = "template" language = "java" pageWidth = "595"
    pageHeight = "842" columnWidth = "555" leftMargin = "20" rightMargin = "20"
-   topMargin = "20" bottomMargin = "20">
+   topMargin = "20" bottomMargin = "20" scriptletClass = "com.javaaround.TestApp.MyScriptlet">
    
    <parameter name = "ReportTitle" class = "java.lang.String"/>
    <parameter name = "Author" class = "java.lang.String"/>
@@ -27,6 +27,7 @@
       <fieldDescription><![CDATA[salary]]></fieldDescription>
    </field>
    <sortField name = "name" order = "Descending"/>
+   <variable name="someVar" class="java.lang.String" calculation="System"/>
    <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
       <variableExpression>
          <![CDATA[Boolean.TRUE]]>
@@ -101,9 +102,18 @@
          <line>
             <reportElement x = "0" y = "0" width = "515" height = "1"/>
          </line>
-         
+         <textField isBlankWhenNull = "true">
+            <reportElement  x = "0" y = "10" width = "600" height = "30"/>
+            <textElement textAlignment = "Left">
+               <font size = "10"/>
+            </textElement>
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$V{someVar}]]>
+            </textFieldExpression>
+				
+         </textField>
          <textField isBlankWhenNull = "true" bookmarkLevel = "1">
-            <reportElement x = "0" y = "10" width = "515" height = "30"/>
+            <reportElement x = "10" y = "20" width = "515" height = "30"/>
            
             <textElement textAlignment = "Center">
                <font size = "22"/>
@@ -138,6 +148,7 @@
                   " records on this report."]]>
             </textFieldExpression>
          </textField>
+         
       </band>
    </title>
    <columnHeader>
@@ -258,6 +269,20 @@
 	            </textElement>
 	            <textFieldExpression><![CDATA[$V{average}]]></textFieldExpression>
 	        </textField>
+	        
+	        <textField isStretchWithOverflow = "true">
+            <reportElement positionType = "Float" x = "200" y = "0" width = "515"
+               height = "15" />
+               
+            <textElement textAlignment = "Center">
+               <font size = "10"/>
+            </textElement>
+               
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{REPORT_SCRIPTLET}.hello()]]>
+            </textFieldExpression>
+            
+         </textField>
        </band>
     </summary>	
 </jasperReport>
