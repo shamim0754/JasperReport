@@ -722,6 +722,13 @@ update template.xml
 
 ![Image of Yaktocat](image/7.png)
 
+### Subreports ###
+[guide](https://www.tutorialspoint.com/jasper_reports/jasper_create_subreports.htm)
+### Chart  ###
+[guide](https://www.tutorialspoint.com/jasper_reports/jasper_creating_charts.htm)
+### internationalization ###
+[guide](https://www.tutorialspoint.com/jasper_reports/jasper_internationalization.htm)
+
 
 
 
