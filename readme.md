@@ -729,7 +729,15 @@ update template.xml
 ### internationalization ###
 [guide](https://www.tutorialspoint.com/jasper_reports/jasper_internationalization.htm)
 
+### Jasper Report Api ###
 
+Jasper Report Api simplifies report creation easy and hides complexity of jasper report
+such api
+
+1. [iReport](http://ireport-tutorial.blogspot.com/)
+2. [DynamicJasper](http://dynamicjasper.com/)
+3. [DynamicReport](http://www.dynamicreports.org/)
+ 
 
 
 
