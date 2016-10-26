@@ -17,6 +17,7 @@ import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import ar.com.fdvs.dj.domain.chart.NumberExpression;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -35,11 +36,12 @@ public class App {
 	public static void main(String[] args) throws JRException {
 
 		FastReportBuilder drb = new FastReportBuilder();
+		Number a = 1;
 		DynamicReport dr;
 		try {
 			dr = drb
 					//,display column name, object field,type,width,true(FixedWidth)
-					//.addColumn("Sl", "SL", String.class.getName(),30)
+					.addColumn("Sl", new NumberExpression(a), 30, false, null, null)
 					.addColumn("Name", "name", String.class.getName(),30)
 					.addColumn("Address", "address", String.class.getName(),50)
 					.addColumn("Salary", "salary", Double.class.getName(),50)
