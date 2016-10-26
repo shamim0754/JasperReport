@@ -2,13 +2,22 @@ package com.javaaround.TestApp;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.javaaround.TestApp.model.Employee;
 
+import ar.com.fdvs.dj.core.DynamicJasperHelper;
+import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
+import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
+import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -25,64 +34,39 @@ import net.sf.jasperreports.view.JasperViewer;
 public class App {
 	public static void main(String[] args) throws JRException {
 
-		JasperPrint jasperPrint = null;
-
-		String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/template.jrxml";
-		/*JasperDesignViewer jasperDesignViewer = new JasperDesignViewer(sourceFileName, true); // true
-		jasperDesignViewer.setVisible(true);*/
-		
-		//compile report first
-		JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
-		
-		//data
-		ArrayList<Employee> employeeList = new ArrayList<Employee>();
-		employeeList.add(new Employee("Shamim", "Tangail"));
-		employeeList.add(new Employee("Alamin", "Rajbari"));
-		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
-		
-		//
-		
-		Map parameters = new HashMap();
-		// Passing ReportTitle and Author as parameters
-        parameters.put("ReportTitle", "List of Employee");
-        parameters.put("Author", "Prepared By Shamim Miah");
-
+		FastReportBuilder drb = new FastReportBuilder();
+		DynamicReport dr;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
-			//fill data
-			//jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
-			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+			dr = drb
+					//,display column name, object field,type,width,true(FixedWidth)
+					//.addColumn("Sl", "SL", String.class.getName(),30)
+					.addColumn("Name", "name", String.class.getName(),30)
+					.addColumn("Address", "address", String.class.getName(),50)
+					.addColumn("Salary", "salary", Double.class.getName(),50)
+					
+					.setTitle("Employee List")
+					.setSubtitle("This report was generated at " + LocalDate.now())
+					.setPrintBackgroundOnOddRows(true)
+					.setUseFullPageWidth(true)
+					.build();
+			//data
+			ArrayList<Employee> employeeList = new ArrayList<Employee>();
+			employeeList.add(new Employee("Shamim", "Tangail",50000.00));
+			employeeList.add(new Employee("Alamin", "Rajbari",10000.00));
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
 			
-			if (jasperPrint != null) {
-				
-	            //export pdf
-	            JasperExportManager.exportReportToPdfFile(jasperPrint,
-	               "F://sample_report.pdf");
-
-	            //export html
-	            JasperExportManager.exportReportToHtmlFile(jasperPrint,
-	               "F://sample_report.html");
-
-	            //export excel
-	            JRXlsxExporter exporter = new JRXlsxExporter();
-	            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-	            File outputFile = new File("F://sample_report.xlsx");
-	            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputFile));
-	            SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration(); 
-	            configuration.setDetectCellType(true);//Set configuration as you like it!!
-	            configuration.setCollapseRowSpan(false);
-	            
-	            exporter.setConfiguration(configuration);
-	            
-	            //export report
-	            exporter.exportReport();
-	         }
-			JasperViewer.viewReport(jasperPrint, false);
+			JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), beanColDataSource);
+			JasperViewer.viewReport(jp);
 			
-		} catch (Exception e) {
-
+		} catch (ColumnBuilderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		
 		/*
 		 * // You can use JasperPrint to create PDF
 		 * //JasperFillManager.printReportToPdfFile(jasperPrint,

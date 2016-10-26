@@ -737,6 +737,97 @@ such api
 1. [iReport](http://ireport-tutorial.blogspot.com/)
 2. [DynamicJasper](http://dynamicjasper.com/)
 3. [DynamicReport](http://www.dynamicreports.org/)
+
+### dynamicreports-vs-dynamicjasper ###
+
+[guide](http://stackoverflow.com/questions/4956841/dynamicreports-vs-dynamicjasper)
+
+### DynamicJasper ###
+
+add dependency at pom.xml
+```xml
+<dependency>
+	<groupId>ar.com.fdvs</groupId>
+	<artifactId>DynamicJasper</artifactId>
+	<version>5.0.9</version>
+</dependency>
+```
+create App.java
+```java
+package com.javaaround.TestApp;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.javaaround.TestApp.model.Employee;
+
+import ar.com.fdvs.dj.core.DynamicJasperHelper;
+import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
+import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
+import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+import net.sf.jasperreports.view.JasperViewer;
+
+public class App {
+	public static void main(String[] args) throws JRException {
+
+		FastReportBuilder drb = new FastReportBuilder();
+		DynamicReport dr;
+		try {
+			dr = drb
+					//,display column name, object field,type,width,true(FixedWidth)
+					//.addColumn("Sl", "SL", String.class.getName(),30)
+					.addColumn("Name", "name", String.class.getName(),30)
+					.addColumn("Address", "address", String.class.getName(),50)
+					.addColumn("Salary", "salary", Double.class.getName(),50)
+					
+					.setTitle("Employee List")
+					.setSubtitle("This report was generated at " + LocalDate.now())
+					.setPrintBackgroundOnOddRows(true)
+					.setUseFullPageWidth(true)
+					.build();
+			//data
+			ArrayList<Employee> employeeList = new ArrayList<Employee>();
+			employeeList.add(new Employee("Shamim", "Tangail",50000.00));
+			employeeList.add(new Employee("Alamin", "Rajbari",10000.00));
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
+			
+			JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), beanColDataSource);
+			JasperViewer.viewReport(jp);
+			
+		} catch (ColumnBuilderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+	}
+
+}
+
+```
  
 
 
