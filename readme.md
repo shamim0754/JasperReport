@@ -871,6 +871,7 @@ public class App {
 ![Image of Yaktocat](image/8.png)
  
  ### more control on the report option ###
+ 
  if you want to more control(e.g auto serial number) on the report option you need to use `DynamicReportBuilder` instead of `FastReportBuilder`
 
 update App.java
