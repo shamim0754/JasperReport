@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 import com.javaaround.TestApp.model.Employee;
 
+import ar.com.fdvs.dj.core.DJConstants;
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.CustomExpression;
@@ -84,19 +86,35 @@ public class App {
 		drb.setUseFullPageWidth(true);
 		drb.setPrintBackgroundOnOddRows(true);
 		
+		//sql
+		drb.setQuery("select * from employee2 where address = $P{city}", DJConstants.QUERY_LANGUAGE_SQL);
+		
 		DynamicReport dr;
 		try {
 			dr = drb.build();
 			//data
-			ArrayList<Employee> employeeList = new ArrayList<Employee>();
+			/*ArrayList<Employee> employeeList = new ArrayList<Employee>();
 			employeeList.add(new Employee("Shamim", "Tangail",50000.00));
 			employeeList.add(new Employee("Alamin", "Rajbari",10000.00));
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(employeeList);
+			*/
+			Map params = new HashMap();
+			params.put("city", "Dhaka");
 			
-			JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), beanColDataSource);
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+			
+			JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), connection,params);
 			JasperViewer.viewReport(jp);
 			
 		} catch (ColumnBuilderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
