@@ -17,13 +17,23 @@ import ar.com.fdvs.dj.core.DJConstants;
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.CustomExpression;
+import ar.com.fdvs.dj.domain.DJCalculation;
+import ar.com.fdvs.dj.domain.DJGroupLabel;
 import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import ar.com.fdvs.dj.domain.builders.GroupBuilder;
+import ar.com.fdvs.dj.domain.builders.StyleBuilder;
 import ar.com.fdvs.dj.domain.chart.NumberExpression;
+import ar.com.fdvs.dj.domain.constants.Font;
+import ar.com.fdvs.dj.domain.constants.GroupLayout;
+import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
+import ar.com.fdvs.dj.domain.entities.DJGroup;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
+import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -77,17 +87,36 @@ public class App {
 				.setWidth(30)		
 				.build();
 		
+		//create style
+		Style glabelStyle3 = new StyleBuilder(false).setFont(Font.ARIAL_SMALL)
+				.setHorizontalAlign(HorizontalAlign.RIGHT)
+				.setPadding(new Integer(0))
+				.setStretchWithOverflow(false)
+				.build();
+		//create group label
+		DJGroupLabel subTotalLabel = new DJGroupLabel("SubTotal",null);
+		//create column group
+		GroupBuilder gb = new GroupBuilder();
+		DJGroup groupAddress = gb.setCriteriaColumn((PropertyColumn) columnAddress)
+				.addFooterVariable(columnSalary,DJCalculation.SUM)
+				.setGroupLayout(GroupLayout.DEFAULT)
+				.setFooterHeight(new Integer(0))
+				.setFooterLabel(subTotalLabel)
+				.build();
+		
 		//add column into report
 		drb.addColumn(columnSl);
 		drb.addColumn(columnName);
 		drb.addColumn(columnAddress);
 		drb.addColumn(columnSalary);
+		//add group
+		drb.addGroup(groupAddress); 
 		//set property
 		drb.setUseFullPageWidth(true);
 		drb.setPrintBackgroundOnOddRows(true);
 		
 		//sql
-		drb.setQuery("select * from employee2 where address = $P{city}", DJConstants.QUERY_LANGUAGE_SQL);
+		drb.setQuery("select * from employee2", DJConstants.QUERY_LANGUAGE_SQL);
 		
 		DynamicReport dr;
 		try {
