@@ -14,10 +14,14 @@ import com.javaaround.TestApp.model.Employee;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
+import ar.com.fdvs.dj.domain.CustomExpression;
 import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
+import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.chart.NumberExpression;
+import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -34,23 +38,55 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class App {
 	public static void main(String[] args) throws JRException {
-
-		FastReportBuilder drb = new FastReportBuilder();
-		Number a = 1;
+		
+		DynamicReportBuilder drb = new DynamicReportBuilder();
+		drb.setTitle("Employee List")
+			.setSubtitle("This report was generated at " + LocalDate.now());
+		
+		//create column
+		AbstractColumn columnSl = ColumnBuilder.getNew()
+				.setCustomExpression(new CustomExpression(){
+					public Object evaluate(Map fields, Map variables, Map parameters) {
+						 Integer count = (Integer) variables.get("REPORT_COUNT");
+						 return count;
+					}
+					public String getClassName() {
+						return Integer.class.getName();
+					}
+					
+				})
+				.setTitle("SL")		
+				.setWidth(15)
+				.build();
+		AbstractColumn columnName = ColumnBuilder.getNew()		
+		        .setColumnProperty("name", String.class.getName())		
+		        .setTitle("Name")		
+		        .setWidth(30)		
+		        .build();
+		AbstractColumn columnAddress = ColumnBuilder.getNew()		
+				.setColumnProperty("address", String.class.getName())		
+				.setTitle("Address")		
+				.setWidth(30)		
+				.build();
+		
+		AbstractColumn columnSalary = ColumnBuilder.getNew()		
+				.setColumnProperty("salary", Double.class.getName())		
+				.setTitle("Salary")		
+				.setWidth(30)		
+				.build();
+		
+		//add column into report
+		drb.addColumn(columnSl);
+		drb.addColumn(columnName);
+		drb.addColumn(columnAddress);
+		drb.addColumn(columnSalary);
+		//set property
+		drb.setUseFullPageWidth(true);
+		drb.setPrintBackgroundOnOddRows(true);
+		
 		DynamicReport dr;
 		try {
-			dr = drb
-					//,display column name, object field,type,width,true(FixedWidth)
-					.addColumn("Sl", new NumberExpression(a), 30, false, null, null)
-					.addColumn("Name", "name", String.class.getName(),30)
-					.addColumn("Address", "address", String.class.getName(),50)
-					.addColumn("Salary", "salary", Double.class.getName(),50)
-					
-					.setTitle("Employee List")
-					.setSubtitle("This report was generated at " + LocalDate.now())
-					.setPrintBackgroundOnOddRows(true)
-					.setUseFullPageWidth(true)
-					.build();
+			dr = drb.build();
 			//data
 			ArrayList<Employee> employeeList = new ArrayList<Employee>();
 			employeeList.add(new Employee("Shamim", "Tangail",50000.00));
@@ -61,9 +97,6 @@ public class App {
 			JasperViewer.viewReport(jp);
 			
 		} catch (ColumnBuilderException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
