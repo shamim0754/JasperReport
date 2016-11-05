@@ -1,0 +1,288 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN"
+   "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport xmlns = "http://jasperreports.sourceforge.net/jasperreports"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://jasperreports.sourceforge.net/jasperreports
+   http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+   name = "template" language = "java" pageWidth = "595"
+   pageHeight = "842" columnWidth = "555" leftMargin = "20" rightMargin = "20"
+   topMargin = "20" bottomMargin = "20" scriptletClass = "com.javaaround.TestApp.MyScriptlet">
+   
+   <parameter name = "ReportTitle" class = "java.lang.String"/>
+   <parameter name = "Author" class = "java.lang.String"/>
+   <queryString language="SQL">
+		<![CDATA[SELECT name,address,salary FROM employee2;]]>
+	</queryString>
+   <!--CDATA a section of element content that is marked for the parser to interpret as only character data, not markup. -->
+   <field name = "address" class = "java.lang.String">
+      <fieldDescription><![CDATA[address]]></fieldDescription>
+   </field>
+   
+   <field name = "name" class = "java.lang.String">
+      <fieldDescription><![CDATA[name]]></fieldDescription>
+   </field>
+   <field name = "salary" class = "java.lang.Double">
+      <fieldDescription><![CDATA[salary]]></fieldDescription>
+   </field>
+   <sortField name = "name" order = "Descending"/>
+   <variable name="someVar" class="java.lang.String" calculation="System"/>
+   <variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
+      <variableExpression>
+         <![CDATA[Boolean.TRUE]]>
+      </variableExpression>
+   </variable>
+   <variable name="total" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{salary}]]></variableExpression>
+    </variable>
+    <variable name="average" class="java.lang.Double" calculation="Average">
+        <variableExpression><![CDATA[$F{salary}]]></variableExpression>
+    </variable>
+   <variable name = "AddressNumber" class = "java.lang.Integer"
+      incrementType = "Group" incrementGroup = "AddressGroup"
+      calculation = "Count">
+      <variableExpression><![CDATA[Boolean.TRUE]]></variableExpression>
+   </variable>
+   
+   <group name = "AddressGroup" minHeightToStartNewPage = "60">
+      <groupExpression><![CDATA[$F{address}]]></groupExpression>
+      
+      <groupHeader>
+         <band height = "20">
+            
+            <textField evaluationTime = "Group" evaluationGroup = "AddressGroup"
+               bookmarkLevel = "1">
+               <reportElement mode = "Opaque" x = "0" y = "5" width = "515"
+                  height = "15" backcolor = "#C0C0C0"/>
+               
+               <box leftPadding = "10">
+                  <bottomPen lineWidth = "1.0"/>
+               </box>
+               <textElement/>
+               
+               <textFieldExpression class = "java.lang.String">
+                  <![CDATA["  " + String.valueOf($V{AddressNumber}) + ". "
+                  + String.valueOf($F{address})]]>
+               </textFieldExpression>
+               
+               <anchorNameExpression>
+                  <![CDATA[String.valueOf($F{address})]]>
+               </anchorNameExpression>
+            </textField>
+         
+         </band>
+      </groupHeader>
+      
+      <groupFooter>
+         <band height = "20">
+            
+            <staticText>
+               <reportElement x = "400" y = "1" width = "60" height = "15"/>
+               <textElement textAlignment = "Right"/>
+               <text><![CDATA[Count :]]></text>
+            </staticText>
+            
+            <textField>
+               <reportElement x = "460" y = "1" width = "30" height = "15"/>
+               <textElement textAlignment = "Right"/>
+               
+               <textFieldExpression class = "java.lang.Integer">
+                  <![CDATA[$V{AddressGroup_COUNT}]]>
+               </textFieldExpression>
+            </textField>
+         
+         </band>
+      </groupFooter>
+   
+   </group>
+   <title>
+      <band height = "70">
+         
+         <line>
+            <reportElement x = "0" y = "0" width = "515" height = "1"/>
+         </line>
+         <textField isBlankWhenNull = "true">
+            <reportElement  x = "0" y = "10" width = "600" height = "30"/>
+            <textElement textAlignment = "Left">
+               <font size = "10"/>
+            </textElement>
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$V{someVar}]]>
+            </textFieldExpression>
+				
+         </textField>
+         <textField isBlankWhenNull = "true" bookmarkLevel = "1">
+            <reportElement x = "10" y = "20" width = "515" height = "30"/>
+           
+            <textElement textAlignment = "Center">
+               <font size = "22"/>
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{ReportTitle}]]>
+            </textFieldExpression>
+				
+            <anchorNameExpression>
+               <![CDATA["Title"]]>
+            </anchorNameExpression>
+         </textField>
+         
+         <textField isBlankWhenNull = "true">
+            <reportElement  x = "0" y = "40" width = "515" height = "20"/>
+            
+            <textElement textAlignment = "Center">
+               <font size = "10"/>
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$P{Author}]]>
+            </textFieldExpression>
+         </textField>
+      	 <textField isStretchWithOverflow = "true">
+            <reportElement x = "0" y = "10" width = "515" height = "15" />
+            <textElement textAlignment = "Center"/>
+               
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA["There are " + String.valueOf($V{REPORT_COUNT}) +
+                  " records on this report."]]>
+            </textFieldExpression>
+         </textField>
+         
+      </band>
+   </title>
+   <columnHeader>
+      <band height = "23">
+         <staticText>
+            <reportElement mode = "Opaque" x = "0" y = "3" 
+               width = "535" height = "15" backcolor = "#70A9A9" />
+            <box>
+               <bottomPen lineWidth = "1.0" lineColor = "#CCCCCC" />
+            </box>
+            <textElement />
+            <text><![CDATA[SL]]> </text>
+         </staticText>
+         
+         <staticText>
+            <reportElement x = "200" y = "3" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font isBold = "true" />
+            </textElement>
+            <text><![CDATA[Address]]></text>
+         </staticText>
+         
+         <staticText>
+            <reportElement x = "0" y = "3" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font isBold = "true" />
+            </textElement>
+            <text><![CDATA[Name]]></text>
+         </staticText>
+      	 <staticText>
+            <reportElement x = "400" y = "3" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font isBold = "true" />
+            </textElement>
+            <text><![CDATA[Salary]]></text>
+         </staticText>	
+      </band>
+   </columnHeader>
+   
+   <detail>
+      <band height = "16">
+         <textField>
+            <reportElement mode = "Opaque" x = "0" y = "0" 
+               width = "535" height = "14" backcolor = "#E5ECF9" />
+            
+            <box>
+               <bottomPen lineWidth = "0.25" lineColor = "#CCCCCC" />
+            </box>
+            
+            <textElement />
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$V{countNumber}]]>
+            </textFieldExpression>
+         </textField>
+         
+         <textField>
+            <reportElement x = "200" y = "0" width = "70" height = "15" />
+            
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font size = "9" />
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$F{address}]]>
+            </textFieldExpression>
+         </textField>
+         
+         <textField>
+            <reportElement x = "0" y = "0" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle" />
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$F{name}]]>
+            </textFieldExpression>
+         </textField>
+      	<textField>
+            <reportElement x = "400" y = "0" width = "70" height = "15" />
+            <textElement textAlignment = "Center" verticalAlignment = "Middle" />
+            
+            <textFieldExpression class = "java.lang.Double">
+               <![CDATA[$F{salary}]]>
+            </textFieldExpression>
+         </textField>
+      </band>
+   </detail>
+  <summary>
+        <band height="20">
+            <staticText>
+                <reportElement x="0" y="0" width="100" height="20"/>
+                <box leftPadding="10"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="100" y="0" width="100" height="20"/>
+                <box leftPadding="10"/>
+                <textElement>
+                    <font isBold="true" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+            </textField>
+       
+	        <staticText>
+	            <reportElement x="160" y="0" width="100" height="20"/>
+	            <box leftPadding="10"/>
+	            <textElement>
+	                <font isBold="true"/>
+	            </textElement>
+	            <text><![CDATA[Average]]></text>
+	        </staticText>
+	        <textField>
+	            <reportElement x="250" y="0" width="100" height="20"/>
+	            <box leftPadding="10"/>
+	            <textElement>
+	                <font isBold="true" isItalic="true"/>
+	            </textElement>
+	            <textFieldExpression><![CDATA[$V{average}]]></textFieldExpression>
+	        </textField>
+	        
+	        <textField isStretchWithOverflow = "true">
+	            <reportElement positionType = "Float" x = "200" y = "0" width = "515"
+	               height = "15" />
+	               
+	            <textElement textAlignment = "Center">
+	               <font size = "10"/>
+	            </textElement>
+	               
+	            <textFieldExpression class = "java.lang.String">
+	               <![CDATA[$P{REPORT_SCRIPTLET}.hello()]]>
+	            </textFieldExpression>
+	            
+         	</textField>
+       </band>
+    </summary>	
+</jasperReport>
