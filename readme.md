@@ -770,7 +770,7 @@ update template.xml
 ### Jasper Report Design(GUI) ###
 
 1. [iReport]
-(http://ireport-tutorial.blogspot.com/) support upto jdk.  iReport development has already terminated.beter to use Jasper studio
+(http://ireport-tutorial.blogspot.com/) support upto jdk 1.7.  iReport development has already terminated.beter to use Jasper studio
 2. Jasper Studio
 (http://ireport-tutorial.blogspot.com/)
 
