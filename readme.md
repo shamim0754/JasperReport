@@ -308,6 +308,21 @@ Run app again by following command
 
 ![Image of Yaktocat](image/1.png)
 
+### Recommnedation ###
+It is recommended to use precompile version(.jasper) into production environment instead every time compile report form .jrxml
+following code snipet use for load report from .jasper instead of .jrxml
+
+```java
+String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/";
+ //compile report first
+        //JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
+  JasperCompileManager.compileReportToFile(
+        		sourceFileName+"template.jrxml",
+        		sourceFileName+"template.jasper");
+  //use compile version for jasper report			
+  JasperReport jasperReport = (JasperReport)JRLoader.loadObjectFromFile(sourceFileName+"template.jasper");
+```
+
 ### Exporting Reports(pdf,xls) ###
 update App.java
 ```java
