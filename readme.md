@@ -316,6 +316,8 @@ following code snipet use for load report from .jasper instead of .jrxml
 String sourceFileName = "F:/newsoft/workspace/TestApp/src/main/java/com/javaaround/TestApp/";
  //compile report first
         //JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
+  
+  //generate template.jasper
   JasperCompileManager.compileReportToFile(
         		sourceFileName+"template.jrxml",
         		sourceFileName+"template.jasper");
