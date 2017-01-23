@@ -790,7 +790,7 @@ update template.xml
 (http://ireport-tutorial.blogspot.com/) support upto jdk 1.7.  iReport development has already terminated.beter to use Jasper studio
 2. Jasper Studio
 (http://ireport-tutorial.blogspot.com/)
-
+http://www.trainingwithliveproject.com/p/java-tutorials.html
 ### Jasper Report Api ###
 
 Jasper Report Api simplifies report creation easy and hides complexity of jasper report
